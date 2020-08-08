@@ -103,14 +103,14 @@ def solve(goal, exprs, &block)
 	    e = a.operate(op, b)
 	    texprs[i] = e
 	    ret = solve(goal, texprs, &block) and return ret
-	  rescue # ZeroDivisionError
+	  rescue ZeroDivisionError
 	  end
 
 	  begin
 	    e = b.operate(op, a)
 	    texprs[i] = e
 	    ret = solve(goal, texprs, &block) and return ret
-	  rescue # ZeroDivisionError
+	  rescue ZeroDivisionError
 	  end
 	}
       end

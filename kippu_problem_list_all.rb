@@ -5,8 +5,6 @@
 #
 # Usage: ruby kippu_problem_list_all.rb <min.> <max.> <# of numbers> <goal number>
 
-require 'mathn'
-
 class Expr
   attr_reader :value, :stack
 
@@ -34,13 +32,13 @@ class Expr
     when MUL
       @value * expr.value
     when DIV
-      @value / expr.value
+      Rational(@value) / expr.value
     end
 
     stack = @stack + expr.stack
     stack.push(op)
 
-    return Expr.new(value, stack)
+    return Expr.new(value.denominator == 1 ? value.numerator : value, stack)
   end
 
   def ==(x)
